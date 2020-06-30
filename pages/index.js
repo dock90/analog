@@ -30,6 +30,7 @@ const Card = styled.div`
   border-radius: 5px;
   width: 288px;
   height: 480px;
+  padding-bottom: 1rem;
 `
 
 const CardHeader = styled.div`
@@ -65,15 +66,48 @@ const Signal = styled.div`
   border: 0.5px solid black;
   border-radius: 50%;
   margin-bottom: 2px;
+  background: ${props => props.complete ? 'black' : 'none'};
 `
 
 const Task = styled.div`
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   p {
     margin: 0;
   }
 `
 
+const TaskCircle = styled.div`
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  border: 0.5px solid black;
+  background: linear-gradient(to right, ${props => props.inProgress ? 'black' : '#e9eef1'} 50%, ${props => props.complete ? 'black' : '#e9eef1'} 50%);
+`
+
+const TaskItem = styled.div`
+  border-bottom: 1px solid black;
+
+  input {
+    width: 100%;
+    background: none;
+    border: none;
+    text-decoration: ${props => props.complete ? 'line-through' : 'none'};
+
+    :focus {
+      outline: none;
+    }
+  }
+`
+
 const Footer = styled.div`
+  p {
+    font-size: 0.8rem;
+  }
   a {
     text-decoration: none;
     color: ${props => props.theme.colors.primary};
@@ -82,10 +116,59 @@ const Footer = styled.div`
 
 const Home = () => {
   const [today, setToday] = useState(null);
+  const [taskCopy, setTaskCopy] = useState({})
+  const [taskInProgress, setTaskInProgress] = useState({})
+  const [taskComplete, setTaskComplete] = useState({})
+  const [signalStatus, setSignalStatus] = useState({})
 
   useEffect(() => {
-    setToday(format(new Date(), 'MM/dd/yyyy'))
+    setToday(format(new Date(), 'MM.dd.yyyy'))
   });
+
+  const signals = ['signal1', 'signal2', 'signal3']
+
+  const tasks = [
+    'task0',
+    'task1',
+    'task2',
+    'task3',
+    'task4',
+    'task5',
+    'task6',
+    'task7',
+    'task8',
+    'task9'
+  ]
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setTaskCopy({
+      ...taskCopy,
+      [event.target.name]: value
+    });
+  }
+
+  const handleTaskUpdate = (event) => {
+    if (taskCopy[event.target.id]) {
+      setTaskInProgress({
+        ...taskInProgress,
+        [event.target.id]: true
+      });
+      if (taskInProgress[event.target.id] === true) {
+        setTaskComplete({
+          ...taskComplete,
+          [event.target.id]: true
+        });
+      }
+    }
+  }
+
+  const handleSignalStatusUpdate = (event) => {
+    setSignalStatus({
+      ...signalStatus,
+      [event.target.id]: !signalStatus[event.target.id]
+    })
+  }
 
   return (
     <Container>
@@ -98,22 +181,36 @@ const Home = () => {
           <Overview>
             <Today><p>{today}</p></Today>
             <Signals>
-              <Signal></Signal>
-              <Signal></Signal>
-              <Signal></Signal>
+              {signals.map(signal => (
+                <Signal
+                  id={signal}
+                  complete={signalStatus[signal]}
+                  onClick={handleSignalStatusUpdate}
+                />
+              ))}
             </Signals>
           </Overview>
         </CardHeader>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
-        <Task><p>A Task</p></Task>
+        {tasks.map(task => {
+          return (
+            <Task key={task}>
+              <TaskCircle
+                id={task}
+                inProgress={taskInProgress[task]}
+                complete={taskComplete[task]}
+                onClick={handleTaskUpdate}
+              />
+              <TaskItem complete={taskComplete[task]}>
+                <input
+                  type="text"
+                  name={task}
+                  value={taskCopy.task}
+                  onChange={handleChange}
+                />
+              </TaskItem>
+            </Task>
+          )
+        })}
       </Card>
 
       <Footer>
