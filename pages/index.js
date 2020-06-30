@@ -14,6 +14,7 @@ const Container = styled.div`
 
 const Header = styled.div`
   margin-top: 0.5rem;
+  margin-left: 0.5rem;
 `
 
 const Title = styled.h1`
@@ -107,6 +108,8 @@ const TaskItem = styled.div`
 `
 
 const Footer = styled.div`
+  margin-left: 0.5rem;
+
   p {
     font-size: 0.8rem;
   }
