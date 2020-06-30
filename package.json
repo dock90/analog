@@ -1,0 +1,22 @@
+{
+  "name": "analog",
+  "version": "1.0.0",
+  "description": "The simplest productivity system",
+  "main": "index.js",
+  "repository": "git@github.com:dock90/analog.git",
+  "author": "EdwardGoomba <edward@dock90.io>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "deploy": "yarn build && yarn export"
+  },
+  "dependencies": {
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
