@@ -96,6 +96,7 @@ const TaskItem = styled.div`
   border-bottom: 1px solid black;
 
   input {
+    font-size: 0.9rem;
     width: 100%;
     background: none;
     border: none;
@@ -188,6 +189,7 @@ const Home = () => {
             <Signals>
               {signals.map(signal => (
                 <Signal
+                  key={signal}
                   id={signal}
                   complete={signalStatus[signal]}
                   onClick={handleSignalStatusUpdate}
