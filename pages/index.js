@@ -31,8 +31,8 @@ const Card = styled.div`
   background: ${props => props.theme.colors.white};
   box-shadow: 5px 5px 8px 2px #ccc;
   border-radius: 5px;
-  width: 288px;
-  height: 480px;
+  width: 18rem;
+  height: 30rem;
   padding-bottom: 1rem;
 `
 
