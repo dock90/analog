@@ -5,6 +5,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 `
 
