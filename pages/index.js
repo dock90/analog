@@ -8,14 +8,16 @@ const Container = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 60px 1fr 50px;
   height: 100vh;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background: ${props => props.theme.colors.background};
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 `
 
-const Header = styled.div``
+const Header = styled.div`
+  margin-top: 0.5rem;
+`
 
 const Title = styled.h1`
+  margin: 0;
   color: ${props => props.theme.colors.primary};
 `
 

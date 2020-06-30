@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #efeae4;
   }
 `
 
