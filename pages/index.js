@@ -22,9 +22,12 @@ const Title = styled.h1`
   color: ${props => props.theme.colors.primary};
 `
 
-const Card = styled.div`
+const CardContainer = styled.div`
   justify-self: center;
   align-self: center;
+`
+
+const Card = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
@@ -34,6 +37,7 @@ const Card = styled.div`
   width: 18rem;
   height: 30rem;
   padding-bottom: 1rem;
+  margin-bottom: 1rem;
 `
 
 const CardHeader = styled.div`
@@ -105,6 +109,37 @@ const TaskItem = styled.div`
     :focus {
       outline: none;
     }
+  }
+`
+
+const Legend = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 26px 20px 20px;
+
+  p {
+    margin: 0;
+  }
+`
+
+const LegendTitle = styled.p`
+  color: #848484;
+  justify-self: center;
+`
+
+const Key = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  grid-template-rows: 1fr;
+
+  div {
+    justify-self: end;
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
+  }
+
+  p {
+    color: #848484;
   }
 `
 
@@ -181,47 +216,60 @@ const Home = () => {
       <Header>
         <Title>Analog</Title>
       </Header>
-      <Card>
-        <CardHeader>
-          <CardType><p>Today</p></CardType>
-          <Overview>
-            <Today><p>{today}</p></Today>
-            <Signals>
-              {signals.map(signal => (
-                <Signal
-                  key={signal}
-                  id={signal}
-                  complete={signalStatus[signal]}
-                  onClick={handleSignalStatusUpdate}
+      <CardContainer>
+        <Card>
+          <CardHeader>
+            <CardType><p>Today</p></CardType>
+            <Overview>
+              <Today><p>{today}</p></Today>
+              <Signals>
+                {signals.map(signal => (
+                  <Signal
+                    key={signal}
+                    id={signal}
+                    complete={signalStatus[signal]}
+                    onClick={handleSignalStatusUpdate}
+                  />
+                ))}
+              </Signals>
+            </Overview>
+          </CardHeader>
+          {tasks.map(task => {
+            return (
+              <Task key={task}>
+                <TaskCircle
+                  id={task}
+                  inProgress={taskInProgress[task]}
+                  complete={taskComplete[task]}
+                  onClick={handleTaskUpdate}
                 />
-              ))}
-            </Signals>
-          </Overview>
-        </CardHeader>
-        {tasks.map(task => {
-          return (
-            <Task key={task}>
-              <TaskCircle
-                id={task}
-                inProgress={taskInProgress[task]}
-                complete={taskComplete[task]}
-                onClick={handleTaskUpdate}
-              />
-              <TaskItem complete={taskComplete[task]}>
-                <input
-                  type="text"
-                  name={task}
-                  value={taskCopy.task}
-                  onChange={handleChange}
-                />
-              </TaskItem>
-            </Task>
-          )
-        })}
-      </Card>
+                <TaskItem complete={taskComplete[task]}>
+                  <input
+                    type="text"
+                    name={task}
+                    value={taskCopy.task}
+                    onChange={handleChange}
+                  />
+                </TaskItem>
+              </Task>
+            )
+          })}
+        </Card>
+        <Legend>
+          <LegendTitle>Legend</LegendTitle>
+          <Key>
+            <TaskCircle inProgress />
+            <p>In Progress</p>
+          </Key>
+          <Key>
+            <TaskCircle inProgress complete />
+            <p>Complete</p>
+          </Key>
+        </Legend>
+      </CardContainer>
 
       <Footer>
-        <p>This is an idea originally created by Jeff Sheldon. Legal Stuffs <a href='https://github.com/dock90/analog'>Here</a></p>
+        <p>Original idea by Jeff Sheldon. Legal Stuffs&trade; <a href='https://github.com/dock90/analog'>here.</a></p>
       </Footer>
     </Container>
   )
