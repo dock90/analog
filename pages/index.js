@@ -101,11 +101,15 @@ const TaskItem = styled.div`
   border-bottom: 1px solid black;
 
   input {
-    font-size: 0.9rem;
     width: 100%;
     background: none;
     border: none;
     text-decoration: ${props => props.complete ? 'line-through' : 'none'};
+    text-decoration-thickness: 3px;
+    font-size: 1.2rem;
+    font-family:  delve-hand, sans-serif;
+    font-weight: 500;
+    font-style: normal;
 
     :focus {
       outline: none;
@@ -220,6 +224,7 @@ const Home = () => {
           name="description"
           content="Analog is a physical companion for your digital tools that helps you prioritize and focus on your most important tasks."
         />
+        <link rel="stylesheet" href="https://use.typekit.net/zss2etu.css"></link>
       </Head>
       <Header>
         <Title>Analog</Title>
