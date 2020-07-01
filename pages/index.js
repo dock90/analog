@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { format } from 'date-fns'
+import Head from 'next/head'
 
 // styles
 const Container = styled.div`
@@ -213,6 +214,13 @@ const Home = () => {
 
   return (
     <Container>
+      <Head>
+        <title>Analog | The simplest productivity system</title>
+        <meta
+          name="description"
+          content="Analog is a physical companion for your digital tools that helps you prioritize and focus on your most important tasks."
+        />
+      </Head>
       <Header>
         <Title>Analog</Title>
       </Header>
