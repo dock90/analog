@@ -1,5 +1,5 @@
-import App from 'next/app'
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import App from 'next/app';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 // global styles
 const GlobalStyle = createGlobalStyle`
@@ -8,25 +8,25 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #efeae4;
   }
-`
+`;
 
 // theme styles
 const theme = {
-  colors: {
-    primary: '#4a4637',
-    white: '#e9eef1',
-    background: '#efeae4',
-  },
-}
+	colors: {
+		primary: '#4a4637',
+		white: '#e9eef1',
+		background: '#efeae4',
+	},
+};
 
 export default class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props
-    return (
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    )
-  }
+	render() {
+		const { Component, pageProps } = this.props;
+		return (
+			<ThemeProvider theme={theme}>
+				<GlobalStyle />
+				<Component {...pageProps} />
+			</ThemeProvider>
+		);
+	}
 }
