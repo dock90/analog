@@ -240,7 +240,7 @@ const Home = () => {
 	return (
 		<Container>
 			<Head>
-				<title>Analog | The simplest productivity system</title>
+				<title>Analog - The simplest productivity system</title>
 				<meta
 					name='description'
 					content='Analog is a physical companion for your digital tools that helps you prioritize and focus on your most important tasks.'
