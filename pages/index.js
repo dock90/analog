@@ -10,6 +10,10 @@ const Container = styled.div`
 	height: 100vh;
 	padding-left: 0.5rem;
 	padding-right: 0.5rem;
+
+	@media (max-width: 768px) {
+		grid-template-rows: 60px 1fr 80px;
+	}
 `;
 
 const Header = styled.div`
@@ -150,14 +154,26 @@ const Key = styled.div`
 `;
 
 const Footer = styled.div`
-	margin-left: 0.5rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	margin: 0 0.5rem;
+	justify-items: space-between;
 
 	p {
 		font-size: 0.8rem;
 	}
+
+	p:last-child {
+		justify-self: end;
+	}
+
 	a {
 		text-decoration: none;
 		color: ${(props) => props.theme.colors.primary};
+	}
+
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr;
 	}
 `;
 
@@ -292,11 +308,13 @@ const Home = () => {
 					</Key>
 				</Legend>
 			</CardContainer>
-
 			<Footer>
 				<p>
 					Original idea by Jeff Sheldon. Legal Stuffs&trade;{' '}
 					<a href='https://github.com/dock90/analog'>here.</a>
+				</p>
+				<p>
+					Built by Edward @ <a href='https://dock90.io'>Dock90</a>
 				</p>
 			</Footer>
 		</Container>

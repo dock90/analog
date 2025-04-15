@@ -1,10 +1,10 @@
 {
 	"name": "analog",
 	"version": "1.0.0",
-	"description": "The simplest productivity system",
+	"description": "The simplest digital productivity system",
 	"main": "index.js",
 	"repository": "git@github.com:dock90/analog.git",
-	"author": "EdwardGoomba <edward@dock90.io>",
+	"author": "edwardoverthere <edward@dock90.io>",
 	"license": "MIT",
 	"private": false,
 	"scripts": {
