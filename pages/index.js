@@ -6,13 +6,12 @@ import Head from 'next/head';
 const Container = styled.div`
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 60px 1fr 50px;
+	grid-template-rows: 60px 1fr 30px;
 	height: 100vh;
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
+	padding: 0 0.5rem;
 
 	@media (max-width: 768px) {
-		grid-template-rows: 60px 1fr 80px;
+		grid-template-rows: 60px 1fr 50px;
 	}
 `;
 
@@ -156,11 +155,10 @@ const Key = styled.div`
 const Footer = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	margin: 0 0.5rem;
-	justify-items: space-between;
 
 	p {
 		font-size: 0.8rem;
+		margin: 0;
 	}
 
 	p:last-child {
@@ -174,6 +172,11 @@ const Footer = styled.div`
 
 	@media (max-width: 768px) {
 		grid-template-columns: 1fr;
+		gap: 0.6rem;
+
+		p:last-child {
+			justify-self: start;
+		}
 	}
 `;
 
