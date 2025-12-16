@@ -1,23 +1,23 @@
 {
-	"name": "analog",
-	"version": "1.0.0",
-	"description": "The simplest digital productivity system",
-	"main": "index.js",
-	"repository": "git@github.com:dock90/analog.git",
-	"author": "edwardoverthere <edward@dock90.io>",
-	"license": "MIT",
-	"private": false,
-	"scripts": {
-		"dev": "next",
-		"build": "next build",
-		"start": "next start",
-		"export": "next export",
-		"deploy": "yarn build && yarn export"
-	},
-	"dependencies": {
-		"next": "^14.0.4",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"styled-components": "^6.1.8"
-	}
+  "name": "analog",
+  "version": "1.0.0",
+  "description": "The simplest digital productivity system",
+  "main": "index.js",
+  "repository": "git@github.com:dock90/analog.git",
+  "author": "edwardoverthere <edward@dock90.io>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "deploy": "yarn build && yarn export"
+  },
+  "dependencies": {
+    "next": "14.2.35",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.8"
+  }
 }
