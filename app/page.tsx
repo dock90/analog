@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent, type ChangeEvent } from 'react';
 
 export default function Home() {
-	const [today, setToday] = useState(null);
-	const [taskCopy, setTaskCopy] = useState({});
-	const [taskInProgress, setTaskInProgress] = useState({});
-	const [taskComplete, setTaskComplete] = useState({});
-	const [signalStatus, setSignalStatus] = useState({});
+	const [today, setToday] = useState<string | null>(null);
+	const [taskCopy, setTaskCopy] = useState<Record<string, string>>({});
+	const [taskInProgress, setTaskInProgress] = useState<Record<string, boolean>>({});
+	const [taskComplete, setTaskComplete] = useState<Record<string, boolean>>({});
+	const [signalStatus, setSignalStatus] = useState<Record<string, boolean>>({});
 
 	useEffect(() => {
 		const date = new Date();
@@ -32,7 +32,7 @@ export default function Home() {
 		'task9',
 	];
 
-	const handleChange = (event) => {
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		setTaskCopy({
 			...taskCopy,
@@ -40,25 +40,27 @@ export default function Home() {
 		});
 	};
 
-	const handleTaskUpdate = (event) => {
-		if (taskCopy[event.target.id]) {
+	const handleTaskUpdate = (event: MouseEvent<HTMLDivElement>) => {
+		const id = event.currentTarget.id;
+		if (taskCopy[id]) {
 			setTaskInProgress({
 				...taskInProgress,
-				[event.target.id]: true,
+				[id]: true,
 			});
-			if (taskInProgress[event.target.id] === true) {
+			if (taskInProgress[id] === true) {
 				setTaskComplete({
 					...taskComplete,
-					[event.target.id]: true,
+					[id]: true,
 				});
 			}
 		}
 	};
 
-	const handleSignalStatusUpdate = (event) => {
+	const handleSignalStatusUpdate = (event: MouseEvent<HTMLDivElement>) => {
+		const id = event.currentTarget.id;
 		setSignalStatus({
 			...signalStatus,
-			[event.target.id]: !signalStatus[event.target.id],
+			[id]: !signalStatus[id],
 		});
 	};
 
@@ -102,7 +104,7 @@ export default function Home() {
 								<input
 									type='text'
 									name={task}
-									value={taskCopy.task}
+									value={taskCopy[task] ?? ''}
 									onChange={handleChange}
 								/>
 							</div>
