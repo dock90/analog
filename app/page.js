@@ -1,8 +1,8 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Head from 'next/head';
 
-// styles
 const Container = styled.div`
 	display: grid;
 	grid-template-columns: 1fr;
@@ -73,7 +73,7 @@ const Signal = styled.div`
 	border: 0.5px solid black;
 	border-radius: 50%;
 	margin-bottom: 2px;
-	background: ${(props) => (props.complete ? 'black' : 'none')};
+	background: ${(props) => (props.$complete ? 'black' : 'none')};
 `;
 
 const Task = styled.div`
@@ -95,8 +95,8 @@ const TaskCircle = styled.div`
 	border: 0.5px solid black;
 	background: linear-gradient(
 		to right,
-		${(props) => (props.inProgress ? 'black' : '#e9eef1')} 50%,
-		${(props) => (props.complete ? 'black' : '#e9eef1')} 50%
+		${(props) => (props.$inProgress ? 'black' : '#e9eef1')} 50%,
+		${(props) => (props.$complete ? 'black' : '#e9eef1')} 50%
 	);
 `;
 
@@ -108,7 +108,7 @@ const TaskItem = styled.div`
 		background: none;
 		border: none;
 		text-decoration: ${(props) =>
-			props.complete ? 'line-through' : 'none'};
+			props.$complete ? 'line-through' : 'none'};
 		text-decoration-thickness: 3px;
 		font-size: 1.2rem;
 		font-family: delve-hand, sans-serif;
@@ -180,7 +180,7 @@ const Footer = styled.div`
 	}
 `;
 
-const Home = () => {
+export default function Home() {
 	const [today, setToday] = useState(null);
 	const [taskCopy, setTaskCopy] = useState({});
 	const [taskInProgress, setTaskInProgress] = useState({});
@@ -242,17 +242,6 @@ const Home = () => {
 
 	return (
 		<Container>
-			<Head>
-				<title>Analog - The simplest productivity system</title>
-				<meta
-					name='description'
-					content='Analog is a physical companion for your digital tools that helps you prioritize and focus on your most important tasks.'
-				/>
-				<link
-					rel='stylesheet'
-					href='https://use.typekit.net/zss2etu.css'
-				></link>
-			</Head>
 			<Header>
 				<Title>Analog</Title>
 			</Header>
@@ -271,7 +260,7 @@ const Home = () => {
 									<Signal
 										key={signal}
 										id={signal}
-										complete={signalStatus[signal]}
+										$complete={signalStatus[signal]}
 										onClick={handleSignalStatusUpdate}
 									/>
 								))}
@@ -283,11 +272,11 @@ const Home = () => {
 							<Task key={task}>
 								<TaskCircle
 									id={task}
-									inProgress={taskInProgress[task]}
-									complete={taskComplete[task]}
+									$inProgress={taskInProgress[task]}
+									$complete={taskComplete[task]}
 									onClick={handleTaskUpdate}
 								/>
-								<TaskItem complete={taskComplete[task]}>
+								<TaskItem $complete={taskComplete[task]}>
 									<input
 										type='text'
 										name={task}
@@ -302,11 +291,11 @@ const Home = () => {
 				<Legend>
 					<LegendTitle>Legend</LegendTitle>
 					<Key>
-						<TaskCircle inProgress />
+						<TaskCircle $inProgress />
 						<p>In Progress</p>
 					</Key>
 					<Key>
-						<TaskCircle inProgress complete />
+						<TaskCircle $inProgress $complete />
 						<p>Complete</p>
 					</Key>
 				</Legend>
@@ -322,6 +311,4 @@ const Home = () => {
 			</Footer>
 		</Container>
 	);
-};
-
-export default Home;
+}

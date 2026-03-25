@@ -1,7 +1,7 @@
-import App from 'next/app';
+'use client';
+
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-// global styles
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-// theme styles
 const theme = {
 	colors: {
 		primary: '#4a4637',
@@ -19,14 +18,11 @@ const theme = {
 	},
 };
 
-export default class MyApp extends App {
-	render() {
-		const { Component, pageProps } = this.props;
-		return (
-			<ThemeProvider theme={theme}>
-				<GlobalStyle />
-				<Component {...pageProps} />
-			</ThemeProvider>
-		);
-	}
+export default function ThemeClient({ children }) {
+	return (
+		<ThemeProvider theme={theme}>
+			<GlobalStyle />
+			{children}
+		</ThemeProvider>
+	);
 }
