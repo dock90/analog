@@ -1,5 +1,4 @@
-import StyledComponentsRegistry from './registry';
-import ThemeClient from './theme';
+import './globals.css';
 
 export const metadata = {
 	title: 'Analog - The simplest productivity system',
@@ -16,11 +15,7 @@ export default function RootLayout({ children }) {
 					href='https://use.typekit.net/zss2etu.css'
 				/>
 			</head>
-			<body>
-				<StyledComponentsRegistry>
-					<ThemeClient>{children}</ThemeClient>
-				</StyledComponentsRegistry>
-			</body>
+			<body>{children}</body>
 		</html>
 	);
 }

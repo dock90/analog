@@ -1,184 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-
-const Container = styled.div`
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: 60px 1fr 30px;
-	height: 100vh;
-	padding: 0 0.5rem;
-
-	@media (max-width: 768px) {
-		grid-template-rows: 60px 1fr 50px;
-	}
-`;
-
-const Header = styled.div`
-	margin-top: 0.5rem;
-	margin-left: 0.5rem;
-`;
-
-const Title = styled.h1`
-	margin: 0;
-	color: ${(props) => props.theme.colors.primary};
-`;
-
-const CardContainer = styled.div`
-	justify-self: center;
-	align-self: center;
-`;
-
-const Card = styled.div`
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto;
-	background: ${(props) => props.theme.colors.white};
-	box-shadow: 5px 5px 8px 2px #ccc;
-	border-radius: 5px;
-	width: 18rem;
-	height: 30rem;
-	padding-bottom: 1rem;
-	margin-bottom: 1rem;
-`;
-
-const CardHeader = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: auto;
-	align-items: center;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
-
-	p {
-		margin: 0;
-	}
-`;
-
-const CardType = styled.div``;
-
-const Overview = styled.div`
-	display: grid;
-	grid-template-columns: 6fr 1fr;
-	grid-template-rows: 1fr;
-	justify-items: end;
-`;
-const Today = styled.div``;
-
-const Signals = styled.div``;
-const Signal = styled.div`
-	height: 5px;
-	width: 5px;
-	border: 0.5px solid black;
-	border-radius: 50%;
-	margin-bottom: 2px;
-	background: ${(props) => (props.$complete ? 'black' : 'none')};
-`;
-
-const Task = styled.div`
-	display: grid;
-	grid-template-columns: 25px 1fr;
-	grid-template-rows: 1fr;
-	align-items: center;
-	margin-left: 0.5rem;
-	margin-right: 0.5rem;
-	p {
-		margin: 0;
-	}
-`;
-
-const TaskCircle = styled.div`
-	height: 12px;
-	width: 12px;
-	border-radius: 50%;
-	border: 0.5px solid black;
-	background: linear-gradient(
-		to right,
-		${(props) => (props.$inProgress ? 'black' : '#e9eef1')} 50%,
-		${(props) => (props.$complete ? 'black' : '#e9eef1')} 50%
-	);
-`;
-
-const TaskItem = styled.div`
-	border-bottom: 1px solid black;
-
-	input {
-		width: 100%;
-		background: none;
-		border: none;
-		text-decoration: ${(props) =>
-			props.$complete ? 'line-through' : 'none'};
-		text-decoration-thickness: 3px;
-		font-size: 1.2rem;
-		font-family: delve-hand, sans-serif;
-		font-weight: 500;
-		font-style: normal;
-
-		:focus {
-			outline: none;
-		}
-	}
-`;
-
-const Legend = styled.div`
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: 26px 20px 20px;
-
-	p {
-		margin: 0;
-	}
-`;
-
-const LegendTitle = styled.p`
-	color: #848484;
-	justify-self: center;
-`;
-
-const Key = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1.3fr;
-	grid-template-rows: 1fr;
-
-	div {
-		justify-self: end;
-		margin-right: 0.5rem;
-		margin-top: 0.2rem;
-	}
-
-	p {
-		color: #848484;
-	}
-`;
-
-const Footer = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-
-	p {
-		font-size: 0.8rem;
-		margin: 0;
-	}
-
-	p:last-child {
-		justify-self: end;
-	}
-
-	a {
-		text-decoration: none;
-		color: ${(props) => props.theme.colors.primary};
-	}
-
-	@media (max-width: 768px) {
-		grid-template-columns: 1fr;
-		gap: 0.6rem;
-
-		p:last-child {
-			justify-self: start;
-		}
-	}
-`;
 
 export default function Home() {
 	const [today, setToday] = useState(null);
@@ -241,66 +63,65 @@ export default function Home() {
 	};
 
 	return (
-		<Container>
-			<Header>
-				<Title>Analog</Title>
-			</Header>
-			<CardContainer>
-				<Card>
-					<CardHeader>
-						<CardType>
+		<div className='container'>
+			<div className='header'>
+				<h1 className='title'>Analog</h1>
+			</div>
+			<div className='card-container'>
+				<div className='card'>
+					<div className='card-header'>
+						<div>
 							<p>Today</p>
-						</CardType>
-						<Overview>
-							<Today>
+						</div>
+						<div className='overview'>
+							<div>
 								<p>{today}</p>
-							</Today>
-							<Signals>
+							</div>
+							<div>
 								{signals.map((signal) => (
-									<Signal
+									<div
 										key={signal}
 										id={signal}
-										$complete={signalStatus[signal]}
+										className={`signal${signalStatus[signal] ? ' complete' : ''}`}
 										onClick={handleSignalStatusUpdate}
 									/>
 								))}
-							</Signals>
-						</Overview>
-					</CardHeader>
-					{tasks.map((task) => {
-						return (
-							<Task key={task}>
-								<TaskCircle
-									id={task}
-									$inProgress={taskInProgress[task]}
-									$complete={taskComplete[task]}
-									onClick={handleTaskUpdate}
+							</div>
+						</div>
+					</div>
+					{tasks.map((task) => (
+						<div key={task} className='task'>
+							<div
+								id={task}
+								className={`task-circle${taskInProgress[task] ? ' in-progress' : ''}${taskComplete[task] ? ' complete' : ''}`}
+								onClick={handleTaskUpdate}
+							/>
+							<div
+								className={`task-item${taskComplete[task] ? ' complete' : ''}`}
+							>
+								<input
+									type='text'
+									name={task}
+									value={taskCopy.task}
+									onChange={handleChange}
 								/>
-								<TaskItem $complete={taskComplete[task]}>
-									<input
-										type='text'
-										name={task}
-										value={taskCopy.task}
-										onChange={handleChange}
-									/>
-								</TaskItem>
-							</Task>
-						);
-					})}
-				</Card>
-				<Legend>
-					<LegendTitle>Legend</LegendTitle>
-					<Key>
-						<TaskCircle $inProgress />
+							</div>
+						</div>
+					))}
+				</div>
+				<div className='legend'>
+					<p className='legend-title'>Legend</p>
+					<div className='key'>
+						<div className='task-circle in-progress' />
 						<p>In Progress</p>
-					</Key>
-					<Key>
-						<TaskCircle $inProgress $complete />
+					</div>
+					<div className='key'>
+						<div className='task-circle complete' />
 						<p>Complete</p>
-					</Key>
-				</Legend>
-			</CardContainer>
-			<Footer>
+					</div>
+				</div>
+			</div>
+			<div className='footer'>
 				<p>
 					Original idea by Jeff Sheldon. Legal Stuffs&trade;{' '}
 					<a href='https://github.com/dock90/analog'>here.</a>
@@ -308,7 +129,7 @@ export default function Home() {
 				<p>
 					Built by Edward @ <a href='https://dock90.io'>Dock90</a>
 				</p>
-			</Footer>
-		</Container>
+			</div>
+		</div>
 	);
 }
